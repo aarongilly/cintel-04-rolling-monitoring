@@ -117,13 +117,17 @@ def main() -> None:
     # row 4 → mean of rows [2,3,4]
 
     WINDOW_SIZE: int = 3
+    LARGER_WINDOW_SIZE: int = 5
 
     # ----------------------------------------------------
     # STEP 3.1: DEFINE ROLLING MEAN FOR DAILY READINESS SCORE
     # ----------------------------------------------------
     # The `daily_readiness_score` column holds the readiness score for each day.
     daily_readiness_score_rolling_mean_recipe: pl.Expr = (
-        pl.col("daily_readiness_score").rolling_mean(WINDOW_SIZE).alias("daily_readiness_score_rolling_mean")
+        pl.col("daily_readiness_score").rolling_mean(WINDOW_SIZE).alias("readiness_smaller_window_mean")
+    )
+    daily_readiness_score_rolling_mean_recipe_larger_window: pl.Expr = (
+        pl.col("daily_readiness_score").rolling_mean(LARGER_WINDOW_SIZE).alias("readiness_larger_window_mean")
     )
 
     # ----------------------------------------------------
@@ -131,7 +135,10 @@ def main() -> None:
     # ----------------------------------------------------
     # The `daily_sleep_score` column holds the sleep score for each day.
     daily_sleep_score_rolling_mean_recipe: pl.Expr = (
-        pl.col("daily_sleep_score").rolling_mean(WINDOW_SIZE).alias("daily_sleep_score_rolling_mean")
+        pl.col("daily_sleep_score").rolling_mean(WINDOW_SIZE).alias("sleep_smaller_window_mean")
+    )
+    daily_sleep_score_rolling_mean_recipe_larger_window: pl.Expr = (
+        pl.col("daily_sleep_score").rolling_mean(LARGER_WINDOW_SIZE).alias("sleep_larger_window_mean")
     )
 
     # ----------------------------------------------------
@@ -139,9 +146,10 @@ def main() -> None:
     # ----------------------------------------------------
     # The `daily_activity_score` column holds the activity score for each day.
     daily_activity_score_rolling_mean_recipe: pl.Expr = (
-        pl.col("daily_activity_score")
-        .rolling_mean(WINDOW_SIZE)
-        .alias("daily_activity_score_rolling_mean")
+        pl.col("daily_activity_score").rolling_mean(WINDOW_SIZE).alias("activity_smaller_window_mean")
+    )
+    daily_activity_score_rolling_mean_recipe_larger_window: pl.Expr = (
+        pl.col("daily_activity_score").rolling_mean(LARGER_WINDOW_SIZE).alias("activity_larger_window_mean")
     )
 
     # ----------------------------------------------------
@@ -153,6 +161,9 @@ def main() -> None:
             daily_readiness_score_rolling_mean_recipe,
             daily_sleep_score_rolling_mean_recipe,
             daily_activity_score_rolling_mean_recipe,
+            daily_readiness_score_rolling_mean_recipe_larger_window,
+            daily_sleep_score_rolling_mean_recipe_larger_window,
+            daily_activity_score_rolling_mean_recipe_larger_window
         ]
     )
 
