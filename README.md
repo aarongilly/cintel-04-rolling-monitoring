@@ -94,8 +94,7 @@ After you get a copy of this repo in your own GitHub account,
 open a machine terminal in your `Repos` folder:
 
 ```shell
-# Replace username with YOUR GitHub username.
-git clone https://github.com/username/cintel-04-rolling-monitoring
+git clone https://github.com/aarongilly/cintel-04-rolling-monitoring
 
 cd cintel-04-rolling-monitoring
 code .
@@ -112,7 +111,7 @@ uvx pre-commit install
 git add -A
 uvx pre-commit run --all-files
 
-uv run python -m cintel.rolling_monitor_case
+uv run python -m cintel.rolling_monitor_gillespie
 
 uv run ruff format .
 uv run ruff check . --fix
