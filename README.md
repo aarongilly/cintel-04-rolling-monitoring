@@ -34,10 +34,10 @@ reveal trends in time-series data.
 
 The example pipeline reads time-series system metrics from:
 
-`data/system_metrics_timeseries_case.csv`
+`data/oura_march.csv`
 
 Each row represents one observation at a specific timestamp.
-The pipeline computes rolling averages for requests, errors, and latency, then saves the monitoring results as an artifact.
+The pipeline computes rolling averages for a few metrics from my Oura ring then saves the monitoring results as an artifact.
 
 ## Working Files
 
